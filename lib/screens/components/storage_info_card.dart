@@ -41,21 +41,31 @@ class StorageInfoCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
+                    style: TextStyle(color: Colors.white70),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   Text(
                     "$numOfFiles Files",
                     style: Theme.of(context)
                         .textTheme
-                        .bodySmall!
+                        .labelSmall!
                         .copyWith(color: Colors.white70),
                   ),
                 ],
               ),
             ),
           ),
-          Text(amountOfFiles)
+          Text(
+            amountOfFiles,
+            style: Theme.of(context)
+                .textTheme
+                .labelSmall!
+                .copyWith(color: Colors.white70),
+          )
         ],
       ),
     );

@@ -11,19 +11,21 @@ class DashboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.all(defaultPadding),
-          child: HeaderDash(),
-        ),
-        Row(
-          children: [
-            Expanded(flex: 3, child: FilesCard()),
-            Expanded(child: StorageCard()),
-          ],
-        )
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.all(defaultPadding),
+            child: HeaderDash(),
+          ),
+          Row(
+            children: [
+              Expanded(flex: 3, child: FilesCard()),
+              Expanded(child: StorageCard()),
+            ],
+          )
+        ],
+      ),
     );
   }
 }
@@ -40,7 +42,10 @@ class StorageCard extends StatelessWidget {
         children: [
           Text(
             'Storage Details',
-            style: Theme.of(context).textTheme.titleLarge,
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge!
+                .copyWith(color: Colors.white),
           ),
           SizedBox(
             height: 200,
@@ -70,7 +75,12 @@ class StorageCard extends StatelessWidget {
                               height: 0.5,
                             ),
                       ),
-                      Text("of 128GB")
+                      Text(
+                        "of 128GB",
+                        style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                              color: Colors.white,
+                            ),
+                      )
                     ],
                   ),
                 ),
@@ -116,12 +126,20 @@ class HeaderDash extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(child: Text("Dashboard")),
+        Expanded(
+            child: Text(
+          "Dashboard",
+          style: Theme.of(context)
+              .textTheme
+              .headlineMedium!
+              .copyWith(color: Colors.white),
+        )),
         Spacer(),
         Expanded(
           child: TextField(
               decoration: InputDecoration(
                   hintText: "Search",
+                  hintStyle: TextStyle(color: Colors.white),
                   fillColor: secondaryColor,
                   filled: true,
                   border: OutlineInputBorder(

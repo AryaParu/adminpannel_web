@@ -1,22 +1,26 @@
+import 'package:adminpannel_web/models/Myfiles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../../constants.dart';
+import '../../get controller/pi_controller.dart';
 
 class StorageInfoCard extends StatelessWidget {
   const StorageInfoCard({
     Key? key,
-    required this.title,
-    required this.svgSrc,
+    required this.info,
     required this.amountOfFiles,
-    required this.numOfFiles,
+    required this.index,
   }) : super(key: key);
 
-  final String title, svgSrc, amountOfFiles;
-  final int numOfFiles;
+  final CloudStorageInfo info;
+  final int index;
+  final String amountOfFiles;
 
   @override
   Widget build(BuildContext context) {
+    final Picontroller c = Get.put(Picontroller());
     return Container(
       margin: EdgeInsets.only(top: defaultPadding),
       padding: EdgeInsets.all(defaultPadding),
@@ -28,10 +32,17 @@ class StorageInfoCard extends StatelessWidget {
       ),
       child: Row(
         children: [
+          Expanded(
+            child: Obx(() => Checkbox(
+                value: c.checklist[index],
+                onChanged: (value) {
+                  value == true ? c.add(data: info) : c.remove(data: info);
+                })),
+          ),
           SizedBox(
             height: 20,
             width: 20,
-            child: SvgPicture.asset(svgSrc),
+            child: SvgPicture.asset(info.svgSrc!),
           ),
           Expanded(
             child: Padding(
@@ -40,7 +51,7 @@ class StorageInfoCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    info.title!,
                     style: TextStyle(color: Colors.white70),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -49,7 +60,7 @@ class StorageInfoCard extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    "$numOfFiles Files",
+                    "${info.numOfFiles} Files",
                     style: Theme.of(context)
                         .textTheme
                         .labelSmall!

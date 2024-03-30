@@ -1,7 +1,10 @@
+import 'package:adminpannel_web/get%20controller/pi_controller.dart';
+import 'package:adminpannel_web/models/Myfiles.dart';
 import 'package:adminpannel_web/screens/components/storage_info_card.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../constants.dart';
 import 'components/filescard.dart';
@@ -37,6 +40,7 @@ class StorageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Picontroller c = Get.put(Picontroller());
     return Card(
       child: Column(
         children: [
@@ -51,14 +55,14 @@ class StorageCard extends StatelessWidget {
             height: 200,
             child: Stack(
               children: [
-                PieChart(
-                  PieChartData(
-                    sectionsSpace: 0,
-                    centerSpaceRadius: 70,
-                    startDegreeOffset: -90,
-                    sections: paiChartSelectionData,
-                  ),
-                ),
+                Obx(() => PieChart(
+                      PieChartData(
+                        sectionsSpace: 0,
+                        centerSpaceRadius: 70,
+                        startDegreeOffset: -90,
+                        sections: c.paiChartSelectionData,
+                      ),
+                    )),
                 Positioned.fill(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -88,28 +92,24 @@ class StorageCard extends StatelessWidget {
             ),
           ),
           StorageInfoCard(
-            svgSrc: "assets/icons/Documents.svg",
-            title: "Documents Files",
+            info: demoMyFiles[0],
             amountOfFiles: "1.3GB",
-            numOfFiles: 1328,
+            index: 0,
           ),
           StorageInfoCard(
-            svgSrc: "assets/icons/media.svg",
-            title: "Media Files",
+            info: demoMyFiles[1],
             amountOfFiles: "15.3GB",
-            numOfFiles: 1328,
+            index: 1,
           ),
           StorageInfoCard(
-            svgSrc: "assets/icons/folder.svg",
-            title: "Other Files",
+            info: demoMyFiles[2],
             amountOfFiles: "1.3GB",
-            numOfFiles: 1328,
+            index: 2,
           ),
           StorageInfoCard(
-            svgSrc: "assets/icons/unknown.svg",
-            title: "Unknown",
+            info: demoMyFiles[3],
             amountOfFiles: "1.3GB",
-            numOfFiles: 140,
+            index: 3,
           ),
         ],
       ),

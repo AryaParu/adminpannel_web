@@ -28,7 +28,7 @@ List demoMyFiles = [
   CloudStorageInfo(
     title: "Media",
     numOfFiles: 1328,
-    svgSrc: " assets/icons/media.svg",
+    svgSrc: "assets/icons/media_file.svg",
     totalStorage: "2.9GB",
     color: Color(0xFFFFA113),
     percentage: 35,

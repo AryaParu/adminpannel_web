@@ -22,8 +22,8 @@ class StorageInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final Picontroller c = Get.put(Picontroller());
     return Container(
-      margin: EdgeInsets.only(top: defaultPadding),
-      padding: EdgeInsets.all(defaultPadding),
+      margin: const EdgeInsets.all(defaultPadding),
+      padding: const EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
         border: Border.all(width: 2, color: primaryColor.withOpacity(0.15)),
         borderRadius: const BorderRadius.all(
@@ -32,11 +32,18 @@ class StorageInfoCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Expanded(
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 2),
             child: Obx(() => Checkbox(
                 value: c.checklist[index],
                 onChanged: (value) {
-                  value == true ? c.add(data: info) : c.remove(data: info);
+                  if (value != null) {
+                    if (value) {
+                      c.add(data: info);
+                    } else {
+                      c.remove(data: info);
+                    }
+                  }
                 })),
           ),
           SizedBox(
@@ -52,11 +59,11 @@ class StorageInfoCard extends StatelessWidget {
                 children: [
                   Text(
                     info.title!,
-                    style: TextStyle(color: Colors.white70),
+                    style: const TextStyle(color: Colors.white70),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(
@@ -71,7 +78,7 @@ class StorageInfoCard extends StatelessWidget {
             ),
           ),
           Text(
-            amountOfFiles,
+            "${info.totalStorage.toString()}GB",
             style: Theme.of(context)
                 .textTheme
                 .labelSmall!

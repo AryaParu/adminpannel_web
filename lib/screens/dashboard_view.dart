@@ -68,17 +68,17 @@ class StorageCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(height: defaultPadding),
-                      Text(
-                        "29.1",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineMedium!
-                            .copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              height: 0.5,
-                            ),
-                      ),
+                      Obx(() => Text(
+                            c.totalsorageuserd.toString() + 'GB',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium!
+                                .copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                  height: 0.5,
+                                ),
+                          )),
                       Text(
                         "of 128GB",
                         style: Theme.of(context).textTheme.labelSmall!.copyWith(

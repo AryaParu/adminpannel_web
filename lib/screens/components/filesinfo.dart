@@ -73,7 +73,7 @@ class FilesInfo extends StatelessWidget {
                               .copyWith(color: Colors.white70),
                         ),
                         Text(
-                          info.totalStorage!,
+                          "${info.totalStorage.toString()}GB",
                           style: Theme.of(context)
                               .textTheme
                               .labelSmall!
